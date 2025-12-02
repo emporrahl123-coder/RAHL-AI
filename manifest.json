@@ -1,0 +1,47 @@
+{
+  "name": "RAHL AI Assistant",
+  "short_name": "RAHL AI",
+  "description": "Your intelligent AI assistant for coding, learning, and creativity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/667eea/ffffff?text=RAHL",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/667eea/ffffff?text=RAHL",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "education", "utilities"],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "Chat",
+      "description": "Start a new conversation",
+      "url": "/?new=true"
+    },
+    {
+      "name": "Code Help",
+      "short_name": "Code",
+      "description": "Get coding assistance",
+      "url": "/?action=code"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://via.placeholder.com/1280x720/667eea/ffffff?text=RAHL+AI",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
