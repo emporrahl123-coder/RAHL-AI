@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🤖 RAHL AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body class="light-theme">
+    <!-- Floating Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+        <div class="bg-circle circle-4"></div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo animate-pop">
+                    <div class="logo-icon">
+                        <i class="fas fa-robot"></i>
+                        <div class="pulse-effect"></div>
+                    </div>
+                    <h1 class="logo-text">RAHL <span class="ai-badge">AI</span></h1>
+                </div>
+                <div class="header-controls">
+                    <button class="icon-btn animate-hover" id="themeToggle" title="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn animate-hover" id="clearChat" title="Clear chat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="icon-btn animate-hover" id="menuBtn" title="Menu">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Typing Status -->
+            <div class="typing-status" id="typingStatus">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <p>RAHL is thinking...</p>
+            </div>
+        </header>
+
+        <!-- Chat Messages -->
+        <main class="chat-container" id="chatContainer">
+            <!-- Welcome Message -->
+            <div class="message-wrapper welcome-message animate-fade-in">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="sender">RAHL AI</span>
+                            <span class="time">Just now</span>
+                        </div>
+                        <p class="message-text">Hello! I'm <strong>RAHL</strong>, your intelligent assistant. I can help with coding, writing, analysis, and much more! What would you like to explore today? 🚀</p>
+                        <div class="message-actions">
+                            <button class="quick-action" data-action="code">💻 Code Help</button>
+                            <button class="quick-action" data-action="explain">📚 Explain Concept</button>
+                            <button class="quick-action" data-action="write">✍️ Write Something</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sample Conversation (hidden by default) -->
+            <div class="message-wrapper hidden">
+                <div class="message user-message">
+                    <div class="message-content">
+                        <p>Can you explain AI to me?</p>
+                    </div>
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="message-wrapper hidden">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="sender">RAHL AI</span>
+                            <span class="time">2 min ago</span>
+                        </div>
+                        <p class="message-text">AI (Artificial Intelligence) is the simulation of human intelligence in machines. They can learn, reason, and solve problems! I'm an example of AI right now 🤖</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Quick Suggestions -->
+        <div class="suggestions animate-slide-up">
+            <div class="suggestions-header">
+                <i class="fas fa-lightbulb"></i>
+                <span>Quick Questions</span>
+            </div>
+            <div class="suggestion-chips">
+                <button class="chip" data-question="What is RAHL?">What is RAHL?</button>
+                <button class="chip" data-question="Help me write a Python function">Python help</button>
+                <button class="chip" data-question="Explain quantum computing">Quantum computing</button>
+                <button class="chip" data-question="Create a workout plan">Workout plan</button>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <footer class="input-area">
+            <div class="input-wrapper">
+                <button class="input-action" id="attachBtn" title="Attach file">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <div class="input-container">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Message RAHL..." 
+                        rows="1"
+                        autocomplete="off"
+                        spellcheck="true"></textarea>
+                    <div class="input-actions">
+                        <button class="input-action" id="voiceBtn" title="Voice input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="emoji-btn" title="Emoji">
+                            <i class="far fa-smile"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="send-btn" id="sendBtn" title="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                    <div class="send-wave"></div>
+                </button>
+            </div>
+            
+            <!-- Input Status -->
+            <div class="input-status">
+                <span id="charCount">0/500</span>
+                <span class="status-dot online">
+                    <i class="fas fa-circle"></i>
+                    RAHL is online
+                </span>
+            </div>
+        </footer>
+
+        <!-- Features Panel -->
+        <div class="features-panel" id="featuresPanel">
+            <div class="panel-header">
+                <h3><i class="fas fa-cogs"></i> RAHL Features</h3>
+                <button class="close-panel" id="closePanel">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>Code Generation</h4>
+                    <p>Generate code in any language with explanations</p>
+                </div>
+                <div class="feature-card animate-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Learning Assistant</h4>
+                    <p>Explain complex topics in simple terms</p>
+                </div>
+                <div class="feature-card animate-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h4>Creative Writing</h4>
+                    <p>Write stories, emails, content with AI</p>
+                </div>
+                <div class="feature-card animate-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Data Analysis</h4>
+                    <p>Analyze and visualize data concepts</p>
+                </div>
+            </div>
+            <button class="panel-action">
+                <i class="fas fa-download"></i>
+                Install RAHL App
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Message sent!</span>
+        </div>
+    </div>
+
+    <!-- Attach Menu -->
+    <div class="attach-menu" id="attachMenu">
+        <div class="attach-option">
+            <i class="fas fa-image"></i>
+            <span>Image</span>
+        </div>
+        <div class="attach-option">
+            <i class="fas fa-file"></i>
+            <span>Document</span>
+        </div>
+        <div class="attach-option">
+            <i class="fas fa-code"></i>
+            <span>Code File</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
