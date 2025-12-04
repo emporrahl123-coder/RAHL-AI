@@ -1,23 +1,47 @@
+
+# **FILE 5: `package.json` - Dependencies for Evil Lab**
+
+```json
 {
-  "name": "rahl-ai",
-  "version": "1.0.0",
-  "description": "RAHL AI Assistant",
-  "main": "server.js",
+  "name": "evil-ai-training-lab",
+  "version": "0.0.1",
+  "description": "Educational malicious AI examples for security training",
+  "main": "evil-server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'Building RAHL AI...'",
-    "dev": "node server.js"
+    "start-server": "node evil-server.js",
+    "test": "echo \"WARNING: This is training code only\"",
+    "sandbox": "node sandbox.js"
   },
+  "keywords": [
+    "security",
+    "training",
+    "ethical-hacking",
+    "cybersecurity"
+  ],
+  "author": "Security Training Lab",
+  "license": "EDUCATIONAL-USE-ONLY",
   "dependencies": {
     "express": "^4.18.2",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5"
+    "ws": "^8.14.2",
+    "crypto-js": "^4.2.0"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.6.2",
-    "terser": "^5.19.2"
+    "eslint": "^8.56.0",
+    "eslint-plugin-security": "^1.7.1"
   },
   "engines": {
-    "node": "18.x"
+    "node": ">=18.0.0"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/security-training/evil-ai-lab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/security-training/evil-ai-lab/issues"
+  },
+  "homepage": "https://github.com/security-training/evil-ai-lab#readme",
+  "publishConfig": {
+    "access": "restricted"
   }
 }
