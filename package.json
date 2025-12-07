@@ -1,16 +1,11 @@
-
-# **FILE 5: `package.json` - Dependencies for Evil Lab**
-
-```json
 {
   "name": "evil-ai-training-lab",
   "version": "0.0.1",
   "description": "Educational malicious AI examples for security training",
   "main": "evil-server.js",
   "scripts": {
-    "start-server": "node evil-server.js",
-    "test": "echo \"WARNING: This is training code only\"",
-    "sandbox": "node sandbox.js"
+    "start": "node server.js",
+    "test": "echo \"WARNING: This is training code only\""
   },
   "keywords": [
     "security",
@@ -21,27 +16,9 @@
   "author": "Security Training Lab",
   "license": "EDUCATIONAL-USE-ONLY",
   "dependencies": {
-    "express": "^4.18.2",
-    "ws": "^8.14.2",
-    "crypto-js": "^4.2.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-plugin-security": "^1.7.1"
+    "express": "^4.18.2"
   },
   "engines": {
-    "node": ">=18.0.0"
-  },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/security-training/evil-ai-lab.git"
-  },
-  "bugs": {
-    "url": "https://github.com/security-training/evil-ai-lab/issues"
-  },
-  "homepage": "https://github.com/security-training/evil-ai-lab#readme",
-  "publishConfig": {
-    "access": "restricted"
+    "node": ">=16.0.0"
   }
 }
