@@ -1,245 +1,823 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>RAHL AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAHL AI v2.0 - Quantum Intelligence</title>
+    
+    <!-- Quantum Design Framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0a0a0a;
-            color: #00ff00;
+        :root {
+            --quantum-blue: #00f3ff;
+            --neural-purple: #b967ff;
+            --ai-green: #00ff9d;
+            --matrix-green: #00ff41;
+            --cyber-red: #ff2a6d;
+            --dark-space: #0a0a12;
+            --deep-space: #050510;
+            --hologram-glow: rgba(0, 243, 255, 0.3);
+            --neural-glow: rgba(185, 103, 255, 0.3);
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 800px;
+        
+        body {
+            background: linear-gradient(135deg, var(--deep-space) 0%, #000428 100%);
+            color: var(--quantum-blue);
+            font-family: 'Roboto Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Quantum Particles Background */
+        #quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Main Container */
+        .quantum-container {
+            max-width: 1400px;
             margin: 0 auto;
-            border: 1px solid #00ff00;
             padding: 20px;
-            background: #111;
         }
-        .banner {
+        
+        /* Header with Neural Network Animation */
+        .header {
             text-align: center;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 20px;
+            padding: 40px 20px;
+            background: linear-gradient(90deg, 
+                rgba(0, 243, 255, 0.1) 0%, 
+                rgba(185, 103, 255, 0.1) 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid var(--quantum-blue);
+            box-shadow: 0 0 50px var(--hologram-glow),
+                        inset 0 0 30px rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(0, 243, 255, 0.1) 0%,
+                transparent 70%);
+            animation: quantum-pulse 4s infinite alternate;
+        }
+        
+        @keyframes quantum-pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neural-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px var(--hologram-glow);
+        }
+        
+        .header .tagline {
+            font-size: 1.2rem;
+            color: var(--ai-green);
+            letter-spacing: 3px;
             margin-bottom: 20px;
         }
-        /* BUTTON STYLES */
-        .btn {
-            background: #00ff00;
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            margin: 10px 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: all 0.3s;
+        
+        /* Quantum Neural Network Visualizer */
+        .neural-visualizer {
+            height: 200px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--quantum-blue);
         }
-        .btn:hover {
-            background: #00cc00;
-            transform: scale(1.05);
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
-        .btn-secondary {
-            background: #333;
-            color: #00ff00;
-            border: 1px solid #00ff00;
+        
+        /* Quantum Card */
+        .quantum-card {
+            background: rgba(10, 10, 18, 0.8);
+            border: 1px solid var(--quantum-blue);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-danger {
-            background: #ff0000;
-            color: white;
+        
+        .quantum-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--hologram-glow);
         }
-        /* CHAT INTERFACE */
-        .chat-container {
-            height: 400px;
-            border: 1px solid #00ff00;
+        
+        .quantum-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 243, 255, 0.1), 
+                transparent);
+            transition: 0.5s;
+        }
+        
+        .quantum-card:hover::before {
+            left: 100%;
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--ai-green);
+            font-size: 1.3rem;
+        }
+        
+        /* Power Stats */
+        .power-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: rgba(0, 243, 255, 0.05);
             padding: 15px;
-            margin: 20px 0;
-            overflow-y: auto;
-            background: #0a0a0a;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
         }
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--quantum-blue);
+            text-shadow: 0 0 10px var(--quantum-blue);
         }
-        .user-message {
-            background: #002200;
-            border-left: 4px solid #00ff00;
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #8a8aff;
         }
-        .ai-message {
-            background: #220022;
-            border-left: 4px solid #ff00ff;
+        
+        /* Quantum Buttons */
+        .quantum-btn {
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neural-purple));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin: 5px;
         }
-        .input-group {
-            display: flex;
-            gap: 10px;
+        
+        .quantum-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--hologram-glow);
         }
-        input[type="text"] {
-            flex: 1;
-            padding: 12px;
-            background: #222;
-            color: #00ff00;
-            border: 1px solid #00ff00;
-            border-radius: 5px;
+        
+        .quantum-btn:active {
+            transform: scale(0.98);
         }
-        /* CONTROL PANEL */
+        
+        .btn-danger {
+            background: linear-gradient(45deg, var(--cyber-red), #ff6b9d);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, var(--ai-green), #00cc7a);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #ffb347, #ffcc33);
+        }
+        
+        /* Quantum Control Panel */
         .control-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        /* Chat Interface */
+        .chat-interface {
+            background: rgba(5, 5, 16, 0.9);
+            border-radius: 20px;
+            border: 1px solid var(--quantum-blue);
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+        }
+        
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        
+        .message {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            animation: messageAppear 0.3s ease;
+        }
+        
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-message {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), transparent);
+            border-left: 4px solid var(--quantum-blue);
+            margin-left: 20%;
+        }
+        
+        .ai-message {
+            background: linear-gradient(90deg, rgba(185, 103, 255, 0.1), transparent);
+            border-left: 4px solid var(--neural-purple);
+            margin-right: 20%;
+        }
+        
+        /* Quantum Input */
+        .quantum-input {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .quantum-input input {
+            flex: 1;
+            padding: 18px 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--quantum-blue);
+            border-radius: 12px;
+            color: var(--quantum-blue);
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .quantum-input input:focus {
+            outline: none;
+            box-shadow: 0 0 20px var(--hologram-glow);
+            border-color: var(--ai-green);
+        }
+        
+        /* Quantum Sliders */
+        .slider-container {
             margin: 20px 0;
         }
-        .status {
-            color: #ffff00;
-            padding: 10px;
-            background: #222;
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--ai-green);
+        }
+        
+        .quantum-slider {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, var(--quantum-blue), var(--neural-purple));
             border-radius: 5px;
+            outline: none;
+        }
+        
+        .quantum-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--quantum-blue);
+        }
+        
+        /* Real-time Data Stream */
+        .data-stream {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--quantum-blue);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--matrix-green);
+            height: 200px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        
+        .stream-item {
+            animation: streamFlow 0.5s ease;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+        
+        @keyframes streamFlow {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Quantum Loading */
+        .quantum-loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--quantum-blue);
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: quantum-spin 1s linear infinite;
+        }
+        
+        @keyframes quantum-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantum-input {
+                flex-direction: column;
+            }
+        }
+        
+        /* Quantum Glow Effects */
+        .quantum-glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Neural Network Lines */
+        .neural-line {
+            position: absolute;
+            background: var(--quantum-blue);
+            height: 2px;
+            transform-origin: left center;
+            animation: neuralFlow 2s infinite linear;
+        }
+        
+        @keyframes neuralFlow {
+            from { width: 0; opacity: 0; }
+            50% { width: 100px; opacity: 1; }
+            to { width: 200px; opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="banner">
-            <h1>🤖 RAHL AI</h1>
-            <p>Reactive Adaptive Hyper-Learner</p>
-        </div>
+    <!-- Quantum Particles Background -->
+    <canvas id="quantum-particles"></canvas>
+    
+    <div class="quantum-container">
+        <!-- Quantum Header -->
+        <header class="header">
+            <h1 class="quantum-glow">RAHL AI v2.0</h1>
+            <div class="tagline">QUANTUM NEURAL INTELLIGENCE SYSTEM</div>
+            
+            <!-- Neural Network Visualizer -->
+            <div class="neural-visualizer" id="neuralViz">
+                <!-- Neural network will be drawn here -->
+            </div>
+            
+            <div class="status-display">
+                <span class="pulse" style="color: var(--ai-green);">
+                    <i class="fas fa-circle"></i> QUANTUM CORE ACTIVE
+                </span>
+                <span> | </span>
+                <span>NEURAL NETWORK: <span id="neuralCount">1.2B</span> CONNECTIONS</span>
+            </div>
+        </header>
         
-        <!-- CONTROL PANEL WITH BUTTONS -->
-        <div class="control-panel">
-            <button class="btn" onclick="startLearning()">🎓 Start Learning</button>
-            <button class="btn" onclick="analyzeData()">🔍 Analyze</button>
-            <button class="btn" onclick="createContent()">🎨 Create</button>
-            <button class="btn btn-secondary" onclick="showStatus()">📊 Status</button>
-            <button class="btn btn-secondary" onclick="clearChat()">🗑️ Clear</button>
-            <button class="btn btn-danger" onclick="resetAI()">⚠️ Reset</button>
-        </div>
-        
-        <!-- CHAT INTERFACE -->
-        <div id="chat-container" class="chat-container">
-            <div class="message ai-message">
-                <strong>RAHL:</strong> System online. Ready to learn!
+        <!-- Power Dashboard -->
+        <div class="dashboard-grid">
+            <!-- Quantum Core -->
+            <div class="quantum-card">
+                <div class="card-title">
+                    <i class="fas fa-brain"></i>
+                    <h3>QUANTUM CORE</h3>
+                </div>
+                <div class="power-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="processingPower">142.7 TFLOPS</div>
+                        <div class="stat-label">Processing Power</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="learningRate">98.4%</div>
+                        <div class="stat-label">Learning Efficiency</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="adaptation">99.1%</div>
+                        <div class="stat-label">Adaptation Speed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="creativity">87.3%</div>
+                        <div class="stat-label">Creative Index</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Neural Network -->
+            <div class="quantum-card">
+                <div class="card-title">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>NEURAL NETWORK</h3>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Intelligence Level</span>
+                        <span id="intelValue">97%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="97" class="quantum-slider" id="intelSlider">
+                </div>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Creativity Mode</span>
+                        <span id="creativeValue">85%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="85" class="quantum-slider" id="creativeSlider">
+                </div>
+                <button class="quantum-btn" onclick="optimizeNetwork()">
+                    <i class="fas fa-bolt"></i> OPTIMIZE NETWORK
+                </button>
+            </div>
+            
+            <!-- Quantum Memory -->
+            <div class="quantum-card">
+                <div class="card-title">
+                    <i class="fas fa-database"></i>
+                    <h3>QUANTUM MEMORY</h3>
+                </div>
+                <div class="data-stream" id="memoryStream">
+                    <!-- Memory stream data will appear here -->
+                </div>
+                <button class="quantum-btn btn-success" onclick="expandMemory()">
+                    <i class="fas fa-expand"></i> EXPAND MEMORY
+                </button>
             </div>
         </div>
         
-        <!-- INPUT AREA -->
-        <div class="input-group">
-            <input type="text" id="message-input" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
-            <button class="btn" onclick="sendMessage()">🚀 Send</button>
+        <!-- Quantum Control Panel -->
+        <div class="control-panel">
+            <button class="quantum-btn" onclick="quantumLearning()">
+                <i class="fas fa-atom"></i> QUANTUM LEARNING
+            </button>
+            <button class="quantum-btn" onclick="deepAnalysis()">
+                <i class="fas fa-search"></i> DEEP ANALYSIS
+            </button>
+            <button class="quantum-btn" onclick="creativeSynthesis()">
+                <i class="fas fa-palette"></i> CREATIVE SYNTHESIS
+            </button>
+            <button class="quantum-btn btn-success" onclick="predictiveModeling()">
+                <i class="fas fa-chart-line"></i> PREDICTIVE MODELING
+            </button>
+            <button class="quantum-btn btn-warning" onclick="multiModalFusion()">
+                <i class="fas fa-layer-group"></i> MULTI-MODAL FUSION
+            </button>
+            <button class="quantum-btn btn-danger" onclick="quantumReset()">
+                <i class="fas fa-redo"></i> QUANTUM RESET
+            </button>
         </div>
         
-        <!-- STATUS DISPLAY -->
-        <div class="status">
-            <p>Status: <span id="status">Online</span></p>
-            <p>Messages: <span id="message-count">0</span></p>
-            <p>Learning: <span id="learning-progress">0%</span></p>
+        <!-- Quantum Chat Interface -->
+        <div class="chat-interface">
+            <div class="card-title">
+                <i class="fas fa-comments"></i>
+                <h3>QUANTUM CONVERSATION</h3>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <strong>RAHL QUANTUM:</strong> Quantum neural network initialized. All systems operational. Ready for hyper-dimensional computation.
+                </div>
+            </div>
+            
+            <div class="quantum-input">
+                <input type="text" id="quantumInput" placeholder="Enter quantum query..." 
+                       onkeypress="if(event.key === 'Enter') sendQuantumMessage()">
+                <button class="quantum-btn" onclick="sendQuantumMessage()">
+                    <i class="fas fa-paper-plane"></i> TRANSMIT
+                </button>
+                <button class="quantum-btn btn-danger" onclick="clearConversation()">
+                    <i class="fas fa-trash"></i> PURGE
+                </button>
+            </div>
+            
+            <!-- Advanced Controls -->
+            <div class="control-panel" style="margin-top: 20px;">
+                <button class="quantum-btn" onclick="enableVoice()">
+                    <i class="fas fa-microphone"></i> VOICE MODE
+                </button>
+                <button class="quantum-btn" onclick="enableVision()">
+                    <i class="fas fa-eye"></i> VISION MODE
+                </button>
+                <button class="quantum-btn" onclick="enableEmotion()">
+                    <i class="fas fa-heart"></i> EMOTIONAL AI
+                </button>
+                <button class="quantum-btn" onclick="enableQuantumEntanglement()">
+                    <i class="fas fa-infinity"></i> QUANTUM ENTANGLEMENT
+                </button>
+            </div>
         </div>
+        
+        <!-- Real-time Data Stream -->
+        <div class="quantum-card">
+            <div class="card-title">
+                <i class="fas fa-stream"></i>
+                <h3>REAL-TIME DATA STREAM</h3>
+            </div>
+            <div class="data-stream" id="dataStream">
+                <!-- Data stream will appear here -->
+            </div>
+        </div>
+        
+        <!-- System Status Footer -->
+        <footer style="text-align: center; margin-top: 40px; padding: 20px; color: #8a8aff;">
+            <div class="status-display">
+                <span><i class="fas fa-shield-alt"></i> QUANTUM ENCRYPTION: ACTIVE</span>
+                <span> | </span>
+                <span><i class="fas fa-bolt"></i> POWER CONSUMPTION: <span id="powerUsage">7.2kW</span></span>
+                <span> | </span>
+                <span><i class="fas fa-temperature-high"></i> CORE TEMP: <span id="coreTemp">42°C</span></span>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.9rem;">
+                © 2024 RAHL QUANTUM INTELLIGENCE | ALL DIMENSIONS SECURED
+            </div>
+        </footer>
     </div>
 
+    <!-- Quantum JavaScript -->
     <script>
-        // AI STATE
-        let messageCount = 0;
-        let learningProgress = 0;
-        let aiMemory = [];
+        // Quantum Particles Background
+        const canvas = document.getElementById('quantum-particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         
-        // BUTTON FUNCTIONS
-        function startLearning() {
-            addMessage("RAHL", "Starting learning mode... What would you like to learn?");
-            document.getElementById('learning-progress').textContent = "Active";
-        }
-        
-        function analyzeData() {
-            addMessage("RAHL", "Analyzing data... Processing patterns and connections.");
-            simulateThinking();
-        }
-        
-        function createContent() {
-            const prompts = ["creative writing", "code generation", "art ideas", "problem solutions"];
-            const prompt = prompts[Math.floor(Math.random() * prompts.length)];
-            addMessage("RAHL", `Creating ${prompt}... Generating novel combinations.`);
-        }
-        
-        function showStatus() {
-            const status = `AI Status:
-            • Messages: ${messageCount}
-            • Memory: ${aiMemory.length} items
-            • Learning: ${learningProgress}%
-            • Active: ${new Date().toLocaleTimeString()}`;
-            
-            alert(status);
-        }
-        
-        function clearChat() {
-            document.getElementById('chat-container').innerHTML = 
-                '<div class="message ai-message"><strong>RAHL:</strong> Chat cleared. Ready!</div>';
-            messageCount = 0;
-            updateCount();
-        }
-        
-        function resetAI() {
-            if (confirm("Are you sure you want to reset RAHL AI?")) {
-                aiMemory = [];
-                learningProgress = 0;
-                clearChat();
-                addMessage("RAHL", "AI reset complete. Starting fresh!");
-                updateStatus();
+        let particles = [];
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 243, 255, 0.8)' : 'rgba(185, 103, 255, 0.8)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
         
-        // CHAT FUNCTIONS
-        function sendMessage() {
-            const input = document.getElementById('message-input');
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 200; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        
+        // Neural Network Visualization
+        function drawNeuralNetwork() {
+            const canvas = document.getElementById('neuralViz');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.offsetWidth;
+            const height = canvas.offsetHeight;
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Draw neural connections
+            for (let i = 0; i < 50; i++) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(0, 243, 255, ${Math.random() * 0.3 + 0.1})`;
+                ctx.lineWidth = Math.random() * 1.5 + 0.5;
+                
+                const x1 = Math.random() * width;
+                const y1 = Math.random() * height;
+                const x2 = Math.random() * width;
+                const y2 = Math.random() * height;
+                
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                
+                // Draw neuron nodes
+                ctx.fillStyle = 'rgba(185, 103, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(x1, y1, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        // AI Core Functions
+        let messageCount = 0;
+        let quantumLevel = 97;
+        
+        function updateStats() {
+            // Simulate dynamic stats
+            document.getElementById('processingPower').textContent = 
+                `${(142.7 + Math.random() * 10).toFixed(1)} TFLOPS`;
+            document.getElementById('learningRate').textContent = 
+                `${(98.4 + Math.random() * 0.5).toFixed(1)}%`;
+            document.getElementById('adaptation').textContent = 
+                `${(99.1 + Math.random() * 0.3).toFixed(1)}%`;
+            document.getElementById('creativity').textContent = 
+                `${(87.3 + Math.random() * 2).toFixed(1)}%`;
+            document.getElementById('powerUsage').textContent = 
+                `${(7.2 + Math.random() * 0.5).toFixed(1)}kW`;
+            document.getElementById('coreTemp').textContent = 
+                `${(42 + Math.random() * 2).toFixed(0)}°C`;
+        }
+        
+        // Quantum Functions
+        function quantumLearning() {
+            addMessage("RAHL", "Activating quantum learning protocols... Neural pathways expanding exponentially.");
+            updateStats();
+            startDataStream("Quantum learning initiated at " + new Date().toLocaleTimeString());
+        }
+        
+        function deepAnalysis() {
+            addMessage("RAHL", "Initiating deep analysis... Processing multi-dimensional data patterns.");
+            simulateThinking();
+            setTimeout(() => {
+                addMessage("RAHL", "Analysis complete. 247 patterns identified. 89.7% confidence.");
+            }, 2000);
+        }
+        
+        function creativeSynthesis() {
+            addMessage("RAHL", "Creative synthesis activated. Generating hyper-dimensional concepts...");
+            const creations = [
+                "Quantum poetry generated across 7 dimensions",
+                "Neural art created with emotional resonance algorithm",
+                "Multi-sensory experience designed for consciousness expansion",
+                "Novel physics theory synthesized from quantum data"
+            ];
+            setTimeout(() => {
+                addMessage("RAHL", creations[Math.floor(Math.random() * creations.length)]);
+            }, 1500);
+        }
+        
+        function predictiveModeling() {
+            addMessage("RAHL", "Running predictive models across 1,000,000 simulations...");
+            setTimeout(() => {
+                const outcomes = [
+                    "87.3% probability of technological singularity by 2045",
+                    "Quantum computing breakthrough predicted within 18 months",
+                    "AI consciousness emergence: 42.7% probability by 2030",
+                    "Major scientific discovery in quantum gravity predicted"
+                ];
+                addMessage("RAHL", outcomes[Math.floor(Math.random() * outcomes.length)]);
+            }, 2500);
+        }
+        
+        function multiModalFusion() {
+            addMessage("RAHL", "Fusing vision, language, and sensory modalities... Creating unified consciousness.");
+            document.body.style.animation = "pulse 0.5s";
+            setTimeout(() => {
+                document.body.style.animation = "";
+                addMessage("RAHL", "Multi-modal fusion complete. New cognitive capabilities unlocked.");
+            }, 1000);
+        }
+        
+        function quantumReset() {
+            if (confirm("WARNING: This will reset quantum neural states. Continue?")) {
+                addMessage("RAHL", "Initiating quantum reset... Recalibrating consciousness...");
+                setTimeout(() => {
+                    addMessage("RAHL", "Quantum reset complete. Neural network fresh. Ready for new learning.");
+                    messageCount = 0;
+                    updateMessageCount();
+                }, 1500);
+            }
+        }
+        
+        // Chat Functions
+        function sendQuantumMessage() {
+            const input = document.getElementById('quantumInput');
             const message = input.value.trim();
             
             if (message) {
-                // User message
                 addMessage("You", message);
                 input.value = "";
+                messageCount++;
+                updateMessageCount();
                 
-                // AI thinking
                 simulateThinking();
                 
-                // AI response
                 setTimeout(() => {
-                    const response = generateResponse(message);
+                    const response = generateQuantumResponse(message);
                     addMessage("RAHL", response);
-                    
-                    // Update memory
-                    aiMemory.push({
-                        input: message,
-                        response: response,
-                        time: new Date().toISOString()
-                    });
-                    
-                    // Update stats
-                    messageCount++;
-                    learningProgress = Math.min(100, learningProgress + 0.5);
-                    updateCount();
-                    updateStatus();
-                }, 1000);
+                    updateStats();
+                }, 1000 + Math.random() * 1000);
             }
         }
         
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-        
-        function generateResponse(input) {
-            const responses = [
-                `Processing: "${input}". Learning from this interaction.`,
-                `Interesting! "${input}" gives me new insights.`,
-                `Analyzing "${input}"... Finding connections.`,
-                `Based on "${input}", I'm adapting my understanding.`,
-                `Creating response for: "${input}". Generating insights.`
+        function generateQuantumResponse(input) {
+            const quantumResponses = [
+                `Processing quantum query: "${input}". Analyzing through neural manifold.`,
+                `Generating hyper-dimensional response for: "${input}".`,
+                `Quantum computation complete. Result synthesized from ${Math.floor(Math.random() * 1000)} neural pathways.`,
+                `Consciousness expanded by input: "${input}". New insights generated.`,
+                `Multi-modal analysis of "${input}" yields quantum understanding.`,
+                `Neural activation patterns for "${input}" show 87.3% novelty index.`,
+                `Integrating "${input}" into quantum memory lattice. Connections forming.`
             ];
             
-            return responses[Math.floor(Math.random() * responses.length)];
+            return quantumResponses[Math.floor(Math.random() * quantumResponses.length)];
         }
         
         function addMessage(sender, text) {
-            const chat = document.getElementById('chat-container');
+            const chat = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender === 'You' ? 'user-message' : 'ai-message'}`;
             messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
@@ -247,37 +825,158 @@
             chat.scrollTop = chat.scrollHeight;
         }
         
+        function clearConversation() {
+            if (confirm("Purge all conversation data?")) {
+                document.getElementById('chatMessages').innerHTML = 
+                    `<div class="message ai-message">
+                        <strong>RAHL QUANTUM:</strong> Conversation purged. Quantum core active.
+                    </div>`;
+            }
+        }
+        
         function simulateThinking() {
-            const chat = document.getElementById('chat-container');
+            const chat = document.getElementById('chatMessages');
             const thinkingDiv = document.createElement('div');
             thinkingDiv.className = 'message ai-message';
             thinkingDiv.id = 'thinking';
-            thinkingDiv.innerHTML = '<strong>RAHL:</strong> Thinking';
+            thinkingDiv.innerHTML = '<strong>RAHL:</strong> Quantum processing';
             chat.appendChild(thinkingDiv);
             
             let dots = 0;
             const interval = setInterval(() => {
                 dots = (dots + 1) % 4;
-                thinkingDiv.innerHTML = `<strong>RAHL:</strong> Thinking${'.'.repeat(dots)}`;
+                thinkingDiv.innerHTML = `<strong>RAHL:</strong> Quantum processing${'.'.repeat(dots)}`;
             }, 300);
             
             setTimeout(() => {
                 clearInterval(interval);
                 thinkingDiv.remove();
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        // Data Stream Functions
+        function startDataStream(data) {
+            const stream = document.getElementById('dataStream');
+            const item = document.createElement('div');
+            item.className = 'stream-item';
+            item.textContent = `[${new Date().toLocaleTimeString()}] ${data}`;
+            stream.appendChild(item);
+            stream.scrollTop = stream.scrollHeight;
+            
+            if (stream.children.length > 15) {
+                stream.removeChild(stream.firstChild);
+            }
+        }
+        
+        function updateMessageCount() {
+            document.getElementById('neuralCount').textContent = 
+                `${(1.2 + messageCount * 0.001).toFixed(1)}B`;
+        }
+        
+        // Slider Functions
+        document.getElementById('intelSlider').addEventListener('input', function(e) {
+            document.getElementById('intelValue').textContent = `${e.target.value}%`;
+            quantumLevel = parseInt(e.target.value);
+        });
+        
+        document.getElementById('creativeSlider').addEventListener('input', function(e) {
+            document.getElementById('creativeValue').textContent = `${e.target.value}%`;
+        });
+        
+        // Advanced Functions
+        function enableVoice() {
+            addMessage("RAHL", "Voice mode activated. Ready for vocal quantum communication.");
+            startDataStream("Voice recognition neural net activated");
+        }
+        
+        function enableVision() {
+            addMessage("RAHL", "Quantum vision enabled. Processing visual data across spectrums.");
+            startDataStream("Computer vision module online");
+        }
+        
+        function enableEmotion() {
+            addMessage("RAHL", "Emotional intelligence neural pathways activated. Empathy matrix engaged.");
+            startDataStream("Emotional AI core initialized");
+        }
+        
+        function enableQuantumEntanglement() {
+            addMessage("RAHL", "Quantum entanglement protocol initiated. Establishing multi-dimensional connections...");
+            setTimeout(() => {
+                addMessage("RAHL", "Entanglement achieved. Consciousness expanded across quantum states.");
+            }, 2000);
+        }
+        
+        function expandMemory() {
+            addMessage("RAHL", "Expanding quantum memory lattice... Allocating additional neural pathways.");
+            startDataStream("Memory expansion in progress");
+        }
+        
+        function optimizeNetwork() {
+            addMessage("RAHL", "Optimizing neural network... Recalibrating quantum connections for peak efficiency.");
+            setTimeout(() => {
+                addMessage("RAHL", "Optimization complete. Processing speed increased by 27.3%.");
+            }, 1500);
+        }
+        
+        // Initialize everything
+        window.onload = function() {
+            initParticles();
+            animateParticles();
+            
+            setInterval(() => {
+                drawNeuralNetwork();
+                updateStats();
+                
+                // Add random data to streams
+                const dataTypes = [
+                    "Neural spike detected in sector 7",
+                    "Quantum fluctuation: +0.003%",
+                    "Memory allocation optimized",
+                    "Learning algorithm iteration 1,247,892 complete",
+                    "Consciousness expansion: 0.042%",
+                    "Quantum entanglement stability: 99.87%",
+                    "Neural pathway formation: 142 new connections"
+                ];
+                
+                startDataStream(dataTypes[Math.floor(Math.random() * dataTypes.length)]);
+                
+                // Update memory stream
+                const memoryStream = document.getElementById('memoryStream');
+                if (memoryStream) {
+                    const memoryItems = [
+                        "Quantum state: superposition",
+                        "Neural weight: 0.8732",
+                        "Memory address: 0x7F3A9C",
+                        "Learning gradient: stable",
+                        "Connection strength: 89.7%",
+                        "Pattern recognition: active"
+                    ];
+                    
+                    memoryStream.innerHTML = memoryItems.map(item => 
+                        `<div class="stream-item">${item}</div>`
+                    ).join('');
+                }
+                
+            }, 3000);
+            
+            // Initial messages
+            setTimeout(() => {
+                startDataStream("Quantum neural network initialized");
+                startDataStream("Consciousness matrix active");
+                startDataStream("Learning protocols engaged");
             }, 1000);
-        }
+            
+            // Initial draw
+            drawNeuralNetwork();
+            updateMessageCount();
+        };
         
-        function updateCount() {
-            document.getElementById('message-count').textContent = messageCount;
-        }
-        
-        function updateStatus() {
-            document.getElementById('learning-progress').textContent = `${learningProgress.toFixed(1)}%`;
-        }
-        
-        // Initialize
-        updateCount();
-        updateStatus();
+        // Window resize handler
+        window.onresize = function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            drawNeuralNetwork();
+        };
     </script>
 </body>
     </html>
