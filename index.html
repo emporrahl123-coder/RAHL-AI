@@ -1,234 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🤖 RAHL AI</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#667eea">
+    <title>RAHL AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            background: #111;
+        }
+        .banner {
+            text-align: center;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        /* BUTTON STYLES */
+        .btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #00cc00;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            background: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+        .btn-danger {
+            background: #ff0000;
+            color: white;
+        }
+        /* CHAT INTERFACE */
+        .chat-container {
+            height: 400px;
+            border: 1px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-y: auto;
+            background: #0a0a0a;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background: #002200;
+            border-left: 4px solid #00ff00;
+        }
+        .ai-message {
+            background: #220022;
+            border-left: 4px solid #ff00ff;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            background: #222;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+        }
+        /* CONTROL PANEL */
+        .control-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .status {
+            color: #ffff00;
+            padding: 10px;
+            background: #222;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<body class="light-theme">
-    <!-- Floating Background Elements -->
-    <div class="bg-elements">
-        <div class="bg-circle circle-1"></div>
-        <div class="bg-circle circle-2"></div>
-        <div class="bg-circle circle-3"></div>
-        <div class="bg-circle circle-4"></div>
-    </div>
-
-    <!-- Main App Container -->
-    <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-content">
-                <div class="logo animate-pop">
-                    <div class="logo-icon">
-                        <i class="fas fa-robot"></i>
-                        <div class="pulse-effect"></div>
-                    </div>
-                    <h1 class="logo-text">RAHL <span class="ai-badge">AI</span></h1>
-                </div>
-                <div class="header-controls">
-                    <button class="icon-btn animate-hover" id="themeToggle" title="Toggle theme">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button class="icon-btn animate-hover" id="clearChat" title="Clear chat">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    <button class="icon-btn animate-hover" id="menuBtn" title="Menu">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Typing Status -->
-            <div class="typing-status" id="typingStatus">
-                <div class="typing-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <p>RAHL is thinking...</p>
-            </div>
-        </header>
-
-        <!-- Chat Messages -->
-        <main class="chat-container" id="chatContainer">
-            <!-- Welcome Message -->
-            <div class="message-wrapper welcome-message animate-fade-in">
-                <div class="message ai-message">
-                    <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="sender">RAHL AI</span>
-                            <span class="time">Just now</span>
-                        </div>
-                        <p class="message-text">Hello! I'm <strong>RAHL</strong>, your intelligent assistant. I can help with coding, writing, analysis, and much more! What would you like to explore today? 🚀</p>
-                        <div class="message-actions">
-                            <button class="quick-action" data-action="code">💻 Code Help</button>
-                            <button class="quick-action" data-action="explain">📚 Explain Concept</button>
-                            <button class="quick-action" data-action="write">✍️ Write Something</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sample Conversation (hidden by default) -->
-            <div class="message-wrapper hidden">
-                <div class="message user-message">
-                    <div class="message-content">
-                        <p>Can you explain AI to me?</p>
-                    </div>
-                    <div class="message-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="message-wrapper hidden">
-                <div class="message ai-message">
-                    <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="sender">RAHL AI</span>
-                            <span class="time">2 min ago</span>
-                        </div>
-                        <p class="message-text">AI (Artificial Intelligence) is the simulation of human intelligence in machines. They can learn, reason, and solve problems! I'm an example of AI right now 🤖</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Quick Suggestions -->
-        <div class="suggestions animate-slide-up">
-            <div class="suggestions-header">
-                <i class="fas fa-lightbulb"></i>
-                <span>Quick Questions</span>
-            </div>
-            <div class="suggestion-chips">
-                <button class="chip" data-question="What is RAHL?">What is RAHL?</button>
-                <button class="chip" data-question="Help me write a Python function">Python help</button>
-                <button class="chip" data-question="Explain quantum computing">Quantum computing</button>
-                <button class="chip" data-question="Create a workout plan">Workout plan</button>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1>🤖 RAHL AI</h1>
+            <p>Reactive Adaptive Hyper-Learner</p>
+        </div>
+        
+        <!-- CONTROL PANEL WITH BUTTONS -->
+        <div class="control-panel">
+            <button class="btn" onclick="startLearning()">🎓 Start Learning</button>
+            <button class="btn" onclick="analyzeData()">🔍 Analyze</button>
+            <button class="btn" onclick="createContent()">🎨 Create</button>
+            <button class="btn btn-secondary" onclick="showStatus()">📊 Status</button>
+            <button class="btn btn-secondary" onclick="clearChat()">🗑️ Clear</button>
+            <button class="btn btn-danger" onclick="resetAI()">⚠️ Reset</button>
+        </div>
+        
+        <!-- CHAT INTERFACE -->
+        <div id="chat-container" class="chat-container">
+            <div class="message ai-message">
+                <strong>RAHL:</strong> System online. Ready to learn!
             </div>
         </div>
-
-        <!-- Input Area -->
-        <footer class="input-area">
-            <div class="input-wrapper">
-                <button class="input-action" id="attachBtn" title="Attach file">
-                    <i class="fas fa-paperclip"></i>
-                </button>
-                <div class="input-container">
-                    <textarea 
-                        id="messageInput" 
-                        placeholder="Message RAHL..." 
-                        rows="1"
-                        autocomplete="off"
-                        spellcheck="true"></textarea>
-                    <div class="input-actions">
-                        <button class="input-action" id="voiceBtn" title="Voice input">
-                            <i class="fas fa-microphone"></i>
-                        </button>
-                        <button class="emoji-btn" title="Emoji">
-                            <i class="far fa-smile"></i>
-                        </button>
-                    </div>
-                </div>
-                <button class="send-btn" id="sendBtn" title="Send message">
-                    <i class="fas fa-paper-plane"></i>
-                    <div class="send-wave"></div>
-                </button>
-            </div>
-            
-            <!-- Input Status -->
-            <div class="input-status">
-                <span id="charCount">0/500</span>
-                <span class="status-dot online">
-                    <i class="fas fa-circle"></i>
-                    RAHL is online
-                </span>
-            </div>
-        </footer>
-
-        <!-- Features Panel -->
-        <div class="features-panel" id="featuresPanel">
-            <div class="panel-header">
-                <h3><i class="fas fa-cogs"></i> RAHL Features</h3>
-                <button class="close-panel" id="closePanel">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card animate-hover">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h4>Code Generation</h4>
-                    <p>Generate code in any language with explanations</p>
-                </div>
-                <div class="feature-card animate-hover">
-                    <div class="feature-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h4>Learning Assistant</h4>
-                    <p>Explain complex topics in simple terms</p>
-                </div>
-                <div class="feature-card animate-hover">
-                    <div class="feature-icon">
-                        <i class="fas fa-pen-fancy"></i>
-                    </div>
-                    <h4>Creative Writing</h4>
-                    <p>Write stories, emails, content with AI</p>
-                </div>
-                <div class="feature-card animate-hover">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h4>Data Analysis</h4>
-                    <p>Analyze and visualize data concepts</p>
-                </div>
-            </div>
-            <button class="panel-action">
-                <i class="fas fa-download"></i>
-                Install RAHL App
-            </button>
+        
+        <!-- INPUT AREA -->
+        <div class="input-group">
+            <input type="text" id="message-input" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+            <button class="btn" onclick="sendMessage()">🚀 Send</button>
+        </div>
+        
+        <!-- STATUS DISPLAY -->
+        <div class="status">
+            <p>Status: <span id="status">Online</span></p>
+            <p>Messages: <span id="message-count">0</span></p>
+            <p>Learning: <span id="learning-progress">0%</span></p>
         </div>
     </div>
 
-    <!-- Notification Toast -->
-    <div class="toast" id="toast">
-        <div class="toast-content">
-            <i class="fas fa-check-circle"></i>
-            <span id="toastMessage">Message sent!</span>
-        </div>
-    </div>
-
-    <!-- Attach Menu -->
-    <div class="attach-menu" id="attachMenu">
-        <div class="attach-option">
-            <i class="fas fa-image"></i>
-            <span>Image</span>
-        </div>
-        <div class="attach-option">
-            <i class="fas fa-file"></i>
-            <span>Document</span>
-        </div>
-        <div class="attach-option">
-            <i class="fas fa-code"></i>
-            <span>Code File</span>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+    <script>
+        // AI STATE
+        let messageCount = 0;
+        let learningProgress = 0;
+        let aiMemory = [];
+        
+        // BUTTON FUNCTIONS
+        function startLearning() {
+            addMessage("RAHL", "Starting learning mode... What would you like to learn?");
+            document.getElementById('learning-progress').textContent = "Active";
+        }
+        
+        function analyzeData() {
+            addMessage("RAHL", "Analyzing data... Processing patterns and connections.");
+            simulateThinking();
+        }
+        
+        function createContent() {
+            const prompts = ["creative writing", "code generation", "art ideas", "problem solutions"];
+            const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+            addMessage("RAHL", `Creating ${prompt}... Generating novel combinations.`);
+        }
+        
+        function showStatus() {
+            const status = `AI Status:
+            • Messages: ${messageCount}
+            • Memory: ${aiMemory.length} items
+            • Learning: ${learningProgress}%
+            • Active: ${new Date().toLocaleTimeString()}`;
+            
+            alert(status);
+        }
+        
+        function clearChat() {
+            document.getElementById('chat-container').innerHTML = 
+                '<div class="message ai-message"><strong>RAHL:</strong> Chat cleared. Ready!</div>';
+            messageCount = 0;
+            updateCount();
+        }
+        
+        function resetAI() {
+            if (confirm("Are you sure you want to reset RAHL AI?")) {
+                aiMemory = [];
+                learningProgress = 0;
+                clearChat();
+                addMessage("RAHL", "AI reset complete. Starting fresh!");
+                updateStatus();
+            }
+        }
+        
+        // CHAT FUNCTIONS
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // User message
+                addMessage("You", message);
+                input.value = "";
+                
+                // AI thinking
+                simulateThinking();
+                
+                // AI response
+                setTimeout(() => {
+                    const response = generateResponse(message);
+                    addMessage("RAHL", response);
+                    
+                    // Update memory
+                    aiMemory.push({
+                        input: message,
+                        response: response,
+                        time: new Date().toISOString()
+                    });
+                    
+                    // Update stats
+                    messageCount++;
+                    learningProgress = Math.min(100, learningProgress + 0.5);
+                    updateCount();
+                    updateStatus();
+                }, 1000);
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function generateResponse(input) {
+            const responses = [
+                `Processing: "${input}". Learning from this interaction.`,
+                `Interesting! "${input}" gives me new insights.`,
+                `Analyzing "${input}"... Finding connections.`,
+                `Based on "${input}", I'm adapting my understanding.`,
+                `Creating response for: "${input}". Generating insights.`
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        function addMessage(sender, text) {
+            const chat = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender === 'You' ? 'user-message' : 'ai-message'}`;
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            chat.appendChild(messageDiv);
+            chat.scrollTop = chat.scrollHeight;
+        }
+        
+        function simulateThinking() {
+            const chat = document.getElementById('chat-container');
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'message ai-message';
+            thinkingDiv.id = 'thinking';
+            thinkingDiv.innerHTML = '<strong>RAHL:</strong> Thinking';
+            chat.appendChild(thinkingDiv);
+            
+            let dots = 0;
+            const interval = setInterval(() => {
+                dots = (dots + 1) % 4;
+                thinkingDiv.innerHTML = `<strong>RAHL:</strong> Thinking${'.'.repeat(dots)}`;
+            }, 300);
+            
+            setTimeout(() => {
+                clearInterval(interval);
+                thinkingDiv.remove();
+            }, 1000);
+        }
+        
+        function updateCount() {
+            document.getElementById('message-count').textContent = messageCount;
+        }
+        
+        function updateStatus() {
+            document.getElementById('learning-progress').textContent = `${learningProgress.toFixed(1)}%`;
+        }
+        
+        // Initialize
+        updateCount();
+        updateStatus();
+    </script>
 </body>
-</html>
+    </html>
