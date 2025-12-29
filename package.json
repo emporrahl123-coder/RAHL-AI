@@ -1,24 +1,38 @@
 {
-  "name": "evil-ai-training-lab",
-  "version": "0.0.1",
-  "description": "Educational malicious AI examples for security training",
-  "main": "evil-server.js",
+  "name": "rahl-ai",
+  "version": "2.0.0",
+  "description": "RAHL AI - Reactive Adaptive Hyper-Learner with Capabilities",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"WARNING: This is training code only\""
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "build": "node build.js",
+    "test": "jest"
   },
-  "keywords": [
-    "security",
-    "training",
-    "ethical-hacking",
-    "cybersecurity"
-  ],
-  "author": "Security Training Lab",
-  "license": "EDUCATIONAL-USE-ONLY",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "mathjs": "^11.9.1",
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.6.0",
+    "exceljs": "^4.4.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.7",
+    "puppeteer": "^21.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "socket.io": "^4.5.0",
+    "multer": "^1.4.5-lts.1",
+    "csv-parser": "^3.0.0",
+    "natural": "^6.3.0",
+    "uuid": "^9.0.0"
   },
-  "engines": {
-    "node": ">=16.0.0"
-  }
+  "devDependencies": {
+    "nodemon": "^2.0.0",
+    "jest": "^29.0.0"
+  },
+  "keywords": ["ai", "assistant", "capabilities", "automation"],
+  "author": "RAHL Team",
+  "license": "MIT"
 }
