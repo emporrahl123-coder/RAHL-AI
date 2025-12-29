@@ -1,83 +1,109 @@
-// RAHL AI - Node.js Version
+// app.js - Express server that handles button clicks
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// RAHL AI Core
-class RAHL {
-    constructor() {
-        this.name = "RAHL";
-        this.learned = [];
-        console.log("🤖 RAHL AI initialized");
-    }
-    
-    process(input) {
-        console.log(`Processing: "${input}"`);
-        
-        // Simple responses
-        const responses = [
-            `I'm learning from: "${input}"`,
-            `Interesting! "${input}" makes me think...`,
-            `Processing your query about "${input}"`,
-            `RAHL is analyzing: "${input}"`
-        ];
-        
-        // Learn from input
-        this.learned.push({
-            input: input,
-            timestamp: new Date().toISOString()
-        });
-        
-        return responses[Math.floor(Math.random() * responses.length)];
-    }
-    
-    getStatus() {
-        return {
-            name: this.name,
-            learnedCount: this.learned.length,
-            status: "Online"
-        };
-    }
-}
-
-// Initialize RAHL
-const rahl = new RAHL();
+// Store AI state
+let aiState = {
+    messages: 0,
+    learning: 0,
+    memory: [],
+    isActive: true
+};
 
 // Middleware
 app.use(express.json());
 app.use(express.static('public'));
 
-// Routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// API Endpoints for buttons
+app.post('/api/start-learning', (req, res) => {
+    aiState.isActive = true;
+    aiState.learning += 10;
+    res.json({ 
+        status: 'Learning started',
+        progress: aiState.learning 
+    });
+});
+
+app.post('/api/analyze', (req, res) => {
+    const { data } = req.body;
+    
+    // Simulate analysis
+    const analysis = {
+        patterns: Math.floor(Math.random() * 10),
+        insights: ['Pattern detected', 'Connection found', 'Anomaly identified'],
+        confidence: Math.random() * 100
+    };
+    
+    res.json(analysis);
+});
+
+app.post('/api/create', (req, res) => {
+    const { prompt } = req.body;
+    
+    const creations = [
+        `Created content based on: ${prompt}`,
+        `Generated new idea from: ${prompt}`,
+        `Built solution for: ${prompt}`
+    ];
+    
+    res.json({ 
+        creation: creations[Math.floor(Math.random() * creations.length)],
+        timestamp: new Date().toISOString()
+    });
 });
 
 app.get('/api/status', (req, res) => {
-    res.json(rahl.getStatus());
+    res.json(aiState);
+});
+
+app.post('/api/reset', (req, res) => {
+    aiState = {
+        messages: 0,
+        learning: 0,
+        memory: [],
+        isActive: true
+    };
+    res.json({ status: 'AI reset successfully' });
 });
 
 app.post('/api/chat', (req, res) => {
     const { message } = req.body;
-    if (!message) {
-        return res.status(400).json({ error: "No message provided" });
-    }
+    aiState.messages++;
     
-    const response = rahl.process(message);
-    res.json({ response });
+    const responses = [
+        `I processed: "${message}"`,
+        `Learning from: "${message}"`,
+        `Analyzing: "${message}"`,
+        `Creating response for: "${message}"`
+    ];
+    
+    res.json({ 
+        response: responses[Math.floor(Math.random() * responses.length)],
+        messageCount: aiState.messages
+    });
 });
 
-app.get('/api/learned', (req, res) => {
-    res.json({ learned: rahl.learned.slice(-10) });
+// Serve HTML
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start server
 app.listen(PORT, () => {
     console.log(`
-    ╔══════════════════════════════════╗
-    ║       RAHL AI Server Online      ║
-    ║   http://localhost:${PORT}           ║
-    ╚══════════════════════════════════╝
+    🤖 RAHL AI Server Running
+    🌐 http://localhost:${PORT}
+    
+    Available Endpoints:
+    • POST /api/start-learning
+    • POST /api/analyze  
+    • POST /api/create
+    • GET  /api/status
+    • POST /api/reset
+    • POST /api/chat
     `);
 });
