@@ -649,4 +649,38 @@ class SocialMedia {
         const bestHour = Object.entries(hourCount)
             .sort(([,a], [,b]) => b - a)[0];
         
-        return bestHour ? `${bestHour[0]}:00 (
+        return bestHour ? `${bestHour[0]}:00 (${bestHour[1]} posts)` : 'Not determined';
+    }
+    
+    generateCalendarRecommendations(calendar) {
+        const recommendations = [];
+        
+        const totalPosts = calendar.reduce((sum, day) => sum + day.totalPosts, 0);
+        const avgPostsPerDay = totalPosts / calendar.length;
+        
+        if (avgPostsPerDay < 1) {
+            recommendations.push('Consider increasing posting frequency for better engagement');
+        }
+        
+        if (avgPostsPerDay > 3) {
+            recommendations.push('High posting frequency detected. Monitor for audience fatigue');
+        }
+        
+        // Check for weekend posts
+        const weekendPosts = calendar.filter(day => {
+            const date = new Date(day.date);
+            const dayOfWeek = date.getDay();
+            return dayOfWeek === 0 || dayOfWeek === 6;
+        }).reduce((sum, day) => sum + day.totalPosts, 0);
+        
+        const weekendPercentage = (weekendPosts / totalPosts * 100).toFixed(1);
+        
+        if (weekendPercentage < 20) {
+            recommendations.push(`Only ${weekendPercentage}% of posts are on weekends. Consider weekend posting for different audience`);
+        }
+        
+        return recommendations;
+    }
+}
+
+module.exports = SocialMedia;
